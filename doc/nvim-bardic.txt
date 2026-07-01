@@ -1,0 +1,25 @@
+*nvim-bardic.txt*        Neovim support for Bardic interactive fiction
+
+===============================================================================
+CONTENTS                                                     *nvim-bardic*
+
+nvim-bardic provides Neovim support for Bardic `.bard` files.
+
+Commands:                                                *nvim-bardic-commands*
+
+:BardicCompile        Compile the current Bardic story. (planned)
+:BardicLint           Lint the current Bardic story. (planned)
+:BardicGraph          Show the story graph. (planned)
+:BardicGraphRefresh   Refresh the visible graph. (planned)
+:BardicGraphExport    Export the story graph. (planned)
+:BardicPreview        Preview the passage under the cursor. (planned)
+
+Configuration:                                           *nvim-bardic-config*
+>
+  require('bardic').setup({
+    bardic_cmd = 'bardic',
+    timeout_ms = 10000,
+  })
+<
+
+vim:tw=78:ts=8:ft=help:norl:
