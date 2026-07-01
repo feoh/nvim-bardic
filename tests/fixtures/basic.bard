@@ -1,0 +1,16 @@
+@start Start
+
+:: Start
+Welcome to Bardic in Neovim.
++ [Go north] -> North
++ {has_key} [Open the vault] -> Vault
+
+:: North
+You went north.
++ [Return] -> Start
+
+:: Vault
+Treasure!
+
+:: Orphan
+No choices point here.

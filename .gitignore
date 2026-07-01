@@ -8,8 +8,11 @@ story_graph.*
 .nbardic/
 
 # Test/build output
+.mypy_cache/
+.venv/
 coverage/
 luacov.*
+.ruff_cache/
 .tmp/
 tmp/
 

@@ -1,0 +1,14 @@
+[project]
+name = "nvim-bardic-tools"
+version = "0.0.0"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+module = "bardic.*"
+ignore_missing_imports = true

@@ -3,23 +3,67 @@
 ===============================================================================
 CONTENTS                                                     *nvim-bardic*
 
-nvim-bardic provides Neovim support for Bardic `.bard` files.
+nvim-bardic provides Neovim support for Bardic `.bard` files using the
+`bardic` filetype.
 
-Commands:                                                *nvim-bardic-commands*
+===============================================================================
+COMMANDS                                            *nvim-bardic-commands*
 
-:BardicCompile        Compile the current Bardic story. (planned)
-:BardicLint           Lint the current Bardic story. (planned)
-:BardicGraph          Show the story graph. (planned)
-:BardicGraphRefresh   Refresh the visible graph. (planned)
-:BardicGraphExport    Export the story graph. (planned)
-:BardicPreview        Preview the passage under the cursor. (planned)
+:BardicCompile [file]                               *:BardicCompile*
+        Compile a Bardic story with the Bardic CLI. Errors are sent to the
+        quickfix list when possible.
 
-Configuration:                                           *nvim-bardic-config*
+:BardicLint [file]                                  *:BardicLint*
+        Run `bardic lint` and populate quickfix with reported output.
+
+:BardicGraph [file]                                 *:BardicGraph*
+        Show the Bardic story graph. Uses Bardic compiled JSON when possible
+        and falls back to a simple parser for missing-target stories.
+
+:BardicGraphRefresh                                 *:BardicGraphRefresh*
+        Refresh the visible graph.
+
+:BardicGraphExport [path]                           *:BardicGraphExport*
+        Export the current graph to `path`, or prompt when no path is given.
+
+:BardicPreview [json-state]                         *:BardicPreview*
+        Preview the passage under the cursor with optional JSON state.
+
+===============================================================================
+CONFIGURATION                                        *nvim-bardic-config*
 >
   require('bardic').setup({
     bardic_cmd = 'bardic',
+    python_cmd = nil,
     timeout_ms = 10000,
+    prefer_cli = true,
+    auto_refresh_graph = true,
+    graph = {
+      format = 'png',
+      use_image_nvim = true,
+    },
   })
 <
+
+===============================================================================
+GRAPH MAPPINGS                                      *nvim-bardic-graph*
+
+In the graph buffer:
+  r     Refresh the graph.
+  e     Export the graph.
+
+In the graph index buffer:
+  <CR>  Jump to the selected passage.
+  r     Refresh the graph.
+  e     Export the graph.
+
+===============================================================================
+PREVIEW MAPPINGS                                  *nvim-bardic-preview*
+
+In the preview buffer:
+  <CR>  Choose the selected choice.
+  r     Reset the engine.
+  e     Edit injected state JSON.
+  q     Close the preview.
 
 vim:tw=78:ts=8:ft=help:norl:

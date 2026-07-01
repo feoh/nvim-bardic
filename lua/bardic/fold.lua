@@ -5,11 +5,14 @@ function M.foldexpr(lnum)
   if line:match("^%s*::") then
     return ">1"
   end
-  local next_line = vim.fn.getline(lnum + 1)
-  if next_line == "" and lnum == vim.fn.line("$") then
+  local previous = vim.fn.getline(lnum - 1)
+  if previous:match("^%s*::") then
+    return "1"
+  end
+  if lnum == 1 then
     return "0"
   end
-  return "1"
+  return "="
 end
 
 function M.foldtext()
