@@ -5,6 +5,8 @@ Python-first interactive fiction engine and authoring system.
 
 `nvim-bardic` uses the Neovim filetype `bardic` for `.bard` files.
 
+![Bardic story graph rendered by nvim-bardic](BardicGraph.png)
+
 ## Features
 
 - `.bard` file detection as `bardic`.
