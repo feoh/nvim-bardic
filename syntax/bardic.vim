@@ -2,10 +2,9 @@ if exists('b:current_syntax')
   finish
 endif
 
-runtime! syntax/python.vim
+syntax include @bardicPython syntax/python.vim
 unlet! b:current_syntax
 
-syntax region bardicPythonBlock start=/^\s*@py:\?\s*$/ end=/^\s*@endpy\s*$/ contains=@python
 syntax match bardicPassage /^\s*::\s\+[A-Za-z_][A-Za-z0-9_.]*\(\([^)]*\)\)\?\(\s\+^\w\+\)\?/ contains=bardicPassageMarker,bardicPassageName,bardicPassageParams,bardicTag
 syntax match bardicPassageMarker /^\s*::/ contained
 syntax match bardicPassageName /[A-Za-z_][A-Za-z0-9_.]*/ contained
@@ -23,6 +22,7 @@ syntax match bardicExpression /{[^}]*}/
 syntax match bardicDirective /^\s*@\(start\|include\|render\|input\|metadata\)\>.*/
 syntax match bardicLegacyControl /^\s*<<\(if\|elif\|else\|endif\|for\|endfor\|py\).*>>\s*$/
 syntax match bardicControl /^\s*@\(if\|elif\|else\|endif\|for\|endfor\|py\|endpy\)\>.*/
+syntax region bardicPythonBlock matchgroup=bardicControl start=/^\s*@py:\?\s*$/ end=/^\s*@endpy\s*$/ contains=@bardicPython
 syntax match bardicImport /^\s*\(import\|from\)\>.*/
 syntax match bardicComment /#.*$/
 syntax match bardicComment +//.*$+

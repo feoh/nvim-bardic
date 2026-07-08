@@ -4,8 +4,24 @@ local commands = vim.api.nvim_get_commands({})
 assert(commands.BardicCompile ~= nil, "BardicCompile command should exist")
 assert(commands.BardicGraph ~= nil, "BardicGraph command should exist")
 
+vim.cmd("syntax enable")
 vim.cmd("setfiletype bardic")
 assert(vim.bo.filetype == "bardic", "bardic filetype should be settable")
+
+vim.api.nvim_buf_set_lines(0, 0, -1, false, {
+  "if outside:",
+  "@py:",
+  "if inside:",
+  "@endpy",
+})
+vim.cmd("syntax sync fromstart")
+
+local function syntax_name(line, col)
+  return vim.fn.synIDattr(vim.fn.synID(line, col, 1), "name")
+end
+
+assert(syntax_name(1, 1) ~= "pythonConditional", "Python keywords should not highlight outside @py blocks")
+assert(syntax_name(3, 1) == "pythonConditional", "Python keywords should highlight inside @py blocks")
 
 local parser = require("bardic.parser")
 local graph = require("bardic.graph")
